@@ -13,7 +13,7 @@ state = {
     startGame: true/false,
     errorCounter: number,
     selectedCard1: cardId,
-    selectedCard1: cardId,
+    selectedCard2: cardId,
     totalTime: count seconds
 
 
