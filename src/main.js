@@ -31,12 +31,95 @@ const state = {
             {
                 background: "https://static01.nyt.com/images/2019/06/17/science/17DOGS/17DOGS-superJumbo.jpg",
                 type: 6,
+            },
+            {
+                background: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_cool_summer_slideshow/1800x1200_dog_cool_summer_other.jpg",
+                type: 7,
+            },
+            {
+                background: "https://i.insider.com/5ec6c6dc988ee362762f137b?width=1100&format=jpeg&auto=webp",
+                type: 8,
+            },
+            {
+                background: "https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=20c1a08d26568b0d2623dfc8a59c0e44",
+                type: 9,
+            },
+            {
+                background: "https://atlantahumane.org/wp-content/uploads/2020/06/Adopt-a-Dog-Page-Header-Image.jpg",
+                type: 10,
+
+            }, {
+                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRAO8aETizUy52JGirP7qbert5woSPuVOrOLw&usqp=CAU",
+                type: 11,
+            },
+            {
+                background: "https://static.standard.co.uk/s3fs-public/thumbnails/image/2020/01/16/11/pet-tech-tractive-gps-classic-.jpg?w968",
+                type: 12,
             }
 
 
 
 
-        ]
+
+
+        ],
+        [
+            {
+                background: "https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg",
+                type: 1,
+            },
+            {
+                background: "https://www.sciencenews.org/wp-content/uploads/2020/02/021520_catallergies_main.jpg",
+                type: 2,
+            },
+            {
+                background: "https://images.theconversation.com/files/140105/original/image-20161003-20228-bbrcqu.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=496&fit=clip",
+                type: 3,
+            },
+            {
+                background: "https://icatcare.org/app/uploads/2018/07/Elderly-cats.png",
+                type: 4,
+
+            }, {
+                background: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*",
+                type: 5,
+            },
+            {
+                background: "https://images.theconversation.com/files/85597/original/image-20150618-23263-z93lud.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip",
+                type: 6,
+            },
+            {
+                background: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/dog_cool_summer_slideshow/1800x1200_dog_cool_summer_other.jpg",
+                type: 7,
+            },
+            {
+                background: "https://woodgreen.org.uk/image/image/image/aqCXTNCYOPOJ1ra5XEyeLqte58IAvUyDbNarHLTF.jpeg?w=800&h=422&fit=crop-center",
+                type: 8,
+            },
+            {
+                background: "https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=20c1a08d26568b0d2623dfc8a59c0e44",
+                type: 9,
+            },
+            {
+                background: "https://atlantahumane.org/wp-content/uploads/2020/06/Adopt-a-Dog-Page-Header-Image.jpg",
+                type: 10,
+
+            }, {
+                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRAO8aETizUy52JGirP7qbert5woSPuVOrOLw&usqp=CAU",
+                type: 11,
+            },
+            {
+                background: "https://static.standard.co.uk/s3fs-public/thumbnails/image/2020/01/16/11/pet-tech-tractive-gps-classic-.jpg?w968",
+                type: 12,
+            }
+
+
+
+
+
+
+        ],
+        
     ],
     currentGroupCards: 0,
     cards: [],
@@ -59,9 +142,9 @@ const state = {
 
 
 
-const createWorld = (level, groupType) => {
-
-    let cardsElements = initGame(state.cardsGroups, 0);
+const createWorld = () => {
+    console.log(state.gameLevel);
+    let cardsElements = initGame(state.cardsGroups, state.gameLevel, 0);
 
 
     cardsElements = cardsElements.flat();
@@ -79,9 +162,32 @@ const createWorld = (level, groupType) => {
 
 
 
-const initGame = (cardsArr, type) => {
+const initGame = (cardsArr, level, groupType) => {
+    let upTo = 0;
+    switch (parseInt(level)) {
+        case 0:
+            upTo = 6;
+            gameArea.setAttribute('level', 'easy');
+            break;
+        case 1:
+            upTo = 9;
+            gameArea.setAttribute('level', 'medium');
 
-    return cardsArr[0].map((card, index) => {
+            break;
+        case 2:
+            upTo = 12;
+            gameArea.setAttribute('level', 'hard');
+
+            break;
+        default:
+            console.log("level error");
+    }
+
+    const cards = cardsArr[groupType].slice(0, upTo);
+
+
+
+    return cards.map((card, index) => {
         const card1 = createCard(card, index)
         const card2 = card1.cloneNode(true);
         card2.dataset.index = index + 6;
@@ -134,19 +240,19 @@ const btnOnResetGameHandler = (e) => {
     gameArea.innerHTML = "";
 
     createWorld();
-    state.totalTime=0;
+    state.totalTime = 0;
     fails.textContent = 0;
-    state.errorCounter =0;
+    state.errorCounter = 0;
     state.selectedCard1 = null;
     state.selectedCard2 = null;
 }
 
 const btnOnStartGameHandler = (e) => {
-    const menu =e.currentTarget.parentElement;
+    const menu = e.currentTarget.parentElement;
     const name = menu.querySelector('input.name').value;
     const level = menu.querySelector('select.level').value;
 
-    if(!level || !name){
+    if (!level || !name) {
         return;
     }
 
@@ -158,7 +264,7 @@ const btnOnStartGameHandler = (e) => {
     gameArea.style.display = "grid";
 
     startGame();
-    
+
 
 
 }
@@ -170,8 +276,8 @@ const btnReturnToMainMenu = (e) => {
     state.name = null;
     clearInterval(state.timeInterval);
     state.startGame = false;
-    
-    
+
+
 }
 const cardOnclickHandler = (e) => {
     const card = e.currentTarget;
@@ -250,7 +356,6 @@ function shuffleArray(array) {
 
 gameArea.style.display = 'none';
 
-document.querySelector('.reset-game').addEventListener('click',btnOnResetGameHandler);
-document.querySelector('.start-game').addEventListener('click',btnOnStartGameHandler);
-document.querySelector('.new-game').addEventListener('click',btnReturnToMainMenu);
-
+document.querySelector('.reset-game').addEventListener('click', btnOnResetGameHandler);
+document.querySelector('.start-game').addEventListener('click', btnOnStartGameHandler);
+document.querySelector('.new-game').addEventListener('click', btnReturnToMainMenu);

@@ -71,6 +71,20 @@ header {
     align-items: center;
 }
 
+.game-area__game[level='medium'] {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(120px, 1fr));
+    grid-template-rows: repeat(3, minmax(auto, 1fr));
+
+}
+
+.game-area__game[level='hard'] {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(80px, 1fr));
+    grid-template-rows: repeat(4, auto);
+
+}
+
 .game-area {
     height: 100%;
     width: 100%;
