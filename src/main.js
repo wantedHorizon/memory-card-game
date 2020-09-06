@@ -81,7 +81,7 @@ const state = {
                 type: 4,
 
             }, {
-                background: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*",
+                background: "https://woodgreen.org.uk/image/image/image/aqCXTNCYOPOJ1ra5XEyeLqte58IAvUyDbNarHLTF.jpeg?w=800&h=422&fit=crop-center",
                 type: 5,
             },
             {
@@ -97,19 +97,19 @@ const state = {
                 type: 8,
             },
             {
-                background: "https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=20c1a08d26568b0d2623dfc8a59c0e44",
+                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQIFGKYYdv5EDUqKO13C34qI9NQ29NcqmigkA&usqp=CAU",
                 type: 9,
             },
             {
-                background: "https://atlantahumane.org/wp-content/uploads/2020/06/Adopt-a-Dog-Page-Header-Image.jpg",
+                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYzQhv7WglEFv5SyB8qQ4N10VvVDLyi82-Lg&usqp=CAU",
                 type: 10,
 
             }, {
-                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRAO8aETizUy52JGirP7qbert5woSPuVOrOLw&usqp=CAU",
+                background: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR0n5V7lu71Ue35mpGTLCrXmtl3ZuB4ZPsT8Q&usqp=CAU",
                 type: 11,
             },
             {
-                background: "https://static.standard.co.uk/s3fs-public/thumbnails/image/2020/01/16/11/pet-tech-tractive-gps-classic-.jpg?w968",
+                background: "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/outdoor_cat_risks_ref_guide/1800x1200_outdoor_cat_risks_ref_guide.jpg",
                 type: 12,
             }
 
@@ -124,12 +124,14 @@ const state = {
     currentGroupCards: 0,
     cards: [],
     gameLevel: -1,
+    theme: -1,//0-dogs, 1-cats
     startGame: false,
     errorCounter: 0,
     selectedCard1: null,
     selectedCard2: null,
     totalTime: 0,
     found: 0,
+    maxFound: 0,
     clickEvents: [],
     clickActive: true,
     timeInterval: null
@@ -144,7 +146,7 @@ const state = {
 
 const createWorld = () => {
     console.log(state.gameLevel);
-    let cardsElements = initGame(state.cardsGroups, state.gameLevel, 0);
+    let cardsElements = initGame(state.cardsGroups, state.gameLevel, state.theme);
 
 
     cardsElements = cardsElements.flat();
@@ -168,16 +170,17 @@ const initGame = (cardsArr, level, groupType) => {
         case 0:
             upTo = 6;
             gameArea.setAttribute('level', 'easy');
+            state.maxFound =6;
             break;
         case 1:
             upTo = 9;
             gameArea.setAttribute('level', 'medium');
-
+            state.maxFound = 9;
             break;
         case 2:
             upTo = 12;
             gameArea.setAttribute('level', 'hard');
-
+            state.maxFound = 12;
             break;
         default:
             console.log("level error");
@@ -212,6 +215,7 @@ const createCard = ({
     // console.log(background);
     const card = document.createElement('div');
     card.classList.add('card');
+
     card.dataset.type = type;
     card.innerHTML = `
     <div class="card-inner">
@@ -251,15 +255,15 @@ const btnOnStartGameHandler = (e) => {
     const menu = e.currentTarget.parentElement;
     const name = menu.querySelector('input.name').value;
     const level = menu.querySelector('select.level').value;
-
-    if (!level || !name) {
+    const theme = menu.querySelector('select.theme').value;
+    if (!level || !name || !theme) {
         return;
     }
 
     state.name = name;
     state.gameLevel = level;
     state.startGame = true;
-
+    state.theme = theme;
     menuArea.style.display = "none";
     gameArea.style.display = "grid";
 
@@ -300,7 +304,7 @@ const cardOnclickHandler = (e) => {
         //valid two cards
         if (card1.type === card.dataset.type && card1.index !== card.dataset.index) {
             state.found++;
-            if (state.found === 6) {
+            if (state.found === state.maxFound) {
                 //end game
 
                 gameArea.innerHTML = "<h1> Game over You won!</h1>"

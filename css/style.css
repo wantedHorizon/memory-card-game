@@ -6,7 +6,7 @@
 
 .wrapper {
 
-    max-width: 965px;
+    width: 80%;
     background: #333;
     /* margin: 0 auto; */
     border: 1px solid #999;
@@ -22,11 +22,13 @@
 }
 
 body {
-    min-height: 100vh;
+    height: 100vh;
     background: #f4f4f4;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: center;
+
 }
 
 
@@ -34,14 +36,13 @@ body {
 
 header {
     position: relative;
-    max-width: 965px;
+    width: 100%;
     padding: 10px 20px;
     width: 100%;
     background: #999999;
     display: grid;
     grid-auto-flow: column;
     border-radius: 15px 15px 0 0;
-    /* justify-content: center; */
 }
 
 .err-counter {
@@ -89,7 +90,8 @@ header {
     height: 100%;
     width: 100%;
     display: flex;
-    padding: 30px;
+    justify-content: center;
+    padding: 15px 30px;
 }
 
 
@@ -160,16 +162,109 @@ header {
 
 
 
-@media (max-width: 750px) {
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+
+
+    .wrapper {
+
+        width: 100%;
+        background: #333;
+        /* margin: 0 auto; */
+        border: 1px solid #999;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 15px;
+
+    }
+
+    .game-area__game {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(15vw, 1fr));
+        grid-template-rows: repeat(3, minmax(auto, 1fr));
+
+        grid-gap: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-area__game[level='medium'] {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(15vw, 1fr));
+        grid-template-rows: repeat(6, auto);
+
+    }
+
+    .game-area__game[level='hard'] {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(10vw, 1fr));
+        grid-template-rows: repeat(6, auto);
+
+    }
+
+
+
+}
+
+
+
+@media (max-width: 500px) {
+
+    h1 {
+        font-size: 0.8rem;
+    }
+
+    .game-area__game {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(15vw, 1fr));
+        grid-template-rows: repeat(3, minmax(10vh, 1fr));
+
+        grid-gap: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .game-area__game[level='medium'] {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(15vw, 1fr));
+        grid-template-rows: repeat(6, auto);
+
+    }
+
+    .game-area__game[level='hard'] {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(10vw, 1fr));
+        grid-template-rows: repeat(6, auto);
+
+    }
+
+
+
+}
+
+
+/* @media (max-width: 750px) {
     .card {
         height: 30vw;
         width: 20vw;
-        /* background: #f4f4f4; */
 
         perspective: 1000px;
-        /* Remove this if you don't want the 3D effect */
         background-color: transparent;
-        /* transition: border 2s ease-in, box-shadow 2s ease-out; */
 
     }
 
@@ -187,7 +282,7 @@ header {
     }
 
     .wrapper h1 {
-        /* align-self: flex-start; */
+      
         font-size: 1.2rem;
     }
 
@@ -202,12 +297,9 @@ header {
     .card {
         height: 15vh;
         width: 10vh;
-        /* background: #f4f4f4; */
 
         perspective: 1000px;
-        /* Remove this if you don't want the 3D effect */
         background-color: transparent;
-        /* transition: border 2s ease-in, box-shadow 2s ease-out; */
 
     }
 
@@ -218,12 +310,9 @@ header {
     .card {
         height: 14vh;
         width: 18vw;
-        /* background: #f4f4f4; */
 
         perspective: 1000px;
-        /* Remove this if you don't want the 3D effect */
         background-color: transparent;
-        /* transition: border 2s ease-in, box-shadow 2s ease-out; */
 
     }
-}
+} */
