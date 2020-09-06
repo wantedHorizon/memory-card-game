@@ -9,18 +9,48 @@
 </head>
 
 <body>
+
+
     <div class="wrapper">
+        <header>
+            <div class="err-counter">
+                <p><span>0</span> errors</p>
+            </div>
+            <button class="new-game">New Game</button>
+            <button class="reset-game">Reset Game</button>
+
+            <div class="time">
+                <p><span>0</span>s</p>
+            </div>
+        </header>
+
+
         <!-- <div class="navbar"><button class="reset">New Game</button></div> -->
-        <div class="err-counter">
-            <span>0</span> errors
-        </div>
-        <div class="time">
-            <h4><span>0</span>s</h4>
-        </div>
+
         <h1>Memory Card Game</h1>
         <div class="game-area">
 
             <div class="game-area__game">
+            </div>
+
+            <div class="game-area__menu">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" class="name">
+
+                </div>
+                <div>
+                    <label for="level">Level</label>
+                    <select class="level">
+                        <option value="0">Easy</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Hard</option>
+
+                    </select>
+                </div>
+
+                <button class="start-game">Start Game</button>
+
             </div>
         </div>
 

@@ -7,10 +7,9 @@
 .wrapper {
 
     max-width: 965px;
-    padding: 10px 40px;
     background: #333;
-    margin: 0 auto;
-    border: 1px solid black;
+    /* margin: 0 auto; */
+    border: 1px solid #999;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -18,45 +17,72 @@
     align-items: center;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    position: relative;
     border-radius: 15px;
+
 }
 
 body {
     min-height: 100vh;
     background: #f4f4f4;
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
+
+/* header */
+
+header {
+    position: relative;
+    max-width: 965px;
+    padding: 10px 20px;
+    width: 100%;
+    background: #999999;
+    display: grid;
+    grid-auto-flow: column;
+    border-radius: 15px 15px 0 0;
+    /* justify-content: center; */
+}
+
 .err-counter {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    /* position: absolute; */
+
     color: red;
+    justify-self: flex-start;
+
+    display: inline-block;
 }
 
 .time {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    /* position: absolute; */
+
     color: blue;
+    justify-self: flex-end;
 
 }
 
 .game-area__game {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+    grid-template-rows: repeat(3, minmax(200px, 1fr));
+
+    grid-gap: 30px;
     justify-content: center;
     align-items: center;
+}
+
+.game-area {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 30px;
 }
 
 
 /* cards  */
 .card {
-    height: 200px;
-    width: 150px;
+    height: 100%;
+    width: 100%;
     /* background: #f4f4f4; */
 
     perspective: 1000px;
